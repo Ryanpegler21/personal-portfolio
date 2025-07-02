@@ -1,0 +1,1089 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <title>Ryan Pegler | Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+  /*──────────────────────────────────────────────────────────────────────────
+    GLOBAL RESET & VARIABLES
+  ──────────────────────────────────────────────────────────────────────────*/
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  :root {
+    --clr-bg: #f0f2f5;
+    --clr-text: #1a1a1a;
+    --clr-primary: #0a1d3f;       /* navy */
+    --clr-primary-dark: #1D3A6E;  /* darker navy */
+    --clr-alt-bg: #ffffff;
+    --clr-alt-bg-2: #f8f9fa;
+    --clr-muted: #6c757d;
+    --font-sans: 'Inter',sans-serif;
+    --font-heading: 'Poppins',sans-serif;
+    --transition: .3s ease-in-out;
+  }
+  body.dark {
+    --clr-bg: #1a1a1a;
+    --clr-text: #f0f2f5;
+    --clr-primary: #4F46E5;
+    --clr-primary-dark: #3a5ed8;
+    --clr-alt-bg: #2a2a2a;
+    --clr-alt-bg-2: #333333;
+    --clr-muted: #aaaaaa;
+  }
+
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--font-sans);
+    background:var(--clr-bg);
+    color:var(--clr-text);
+    line-height:1.5;
+  }
+  a{
+    text-decoration:none;
+    color:var(--clr-primary);
+    transition:color var(--transition);
+  }
+  a:hover{color:var(--clr-primary-dark);}
+  h1,h2,h3,h4,h5,h6{
+    font-family:var(--font-heading);
+    color:var(--clr-text);
+    margin-bottom:.75rem;
+  }
+  p{margin-bottom:1rem;}
+  .section{padding:4rem 1rem;background:var(--clr-alt-bg);}
+  .section.alt-bg{background:var(--clr-alt-bg-2);}
+  .section-title{font-size:2rem;position:relative;display:inline-block;}
+    .section-title::after {
+      content: '';
+      display: block;
+      height: 3px;
+      width: 50px;
+      background: var(--clr-primary);
+      margin-top: .25rem;
+      animation: expandContract 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes expandContract {
+      from { width: 50px; }
+      to   { width: 100px; }
+    }
+  .btn{
+    display:inline-block;
+    font-family:var(--font-heading);
+    font-weight:500;
+    border:none;
+    cursor:pointer;
+    transition:background var(--transition),transform var(--transition);
+  }
+  .btn-primary{
+    background:var(--clr-primary);
+    color:#fff;
+    padding:.75rem 1.5rem;
+    border-radius:4px;
+  }
+  .btn-primary:hover{
+    background:var(--clr-primary-dark);
+    transform:translateY(-2px);
+  }
+
+    .animated-lines-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .animated-lines-bg svg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0.25;
+    }
+
+    .animated-lines-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .animated-lines-bg svg {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+
+
+  /*──────────────────────────────────────────────────────────────────────────
+    NAVBAR
+  ──────────────────────────────────────────────────────────────────────────*/
+  #navbar{
+    position:sticky;
+    top:0;
+    background:var(--clr-alt-bg);
+    box-shadow:0 2px 4px rgba(0,0,0,0.1);
+    z-index:100;
+  }
+  .nav-container{
+    max-width:1100px;
+    margin:auto;
+    padding:1rem 0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .brand{
+    font-family:var(--font-heading);
+    font-size:1.5rem;
+    color:var(--clr-text);
+  }
+  .nav-links{
+    list-style:none;
+    display:flex;
+    gap:1rem;
+  }
+  .nav-links a{
+    padding:.5rem;
+    border-radius:4px;
+    transition:background var(--transition);
+  }
+  .nav-links a:hover,
+  .nav-links a.active{
+    background:var(--clr-primary);
+    color:#fff;
+  }
+  #mobile-menu-toggle{
+    display:none;
+    background:none;
+    border:none;
+    font-size:1.5rem;
+  }
+  @media (max-width:768px){
+    .nav-links{
+      position:absolute;
+      top:60px;
+      right:0;
+      background:var(--clr-alt-bg);
+      flex-direction:column;
+      width:200px;
+      transform:translateX(100%);
+      transition:transform var(--transition);
+      box-shadow:-2px 0 5px rgba(0,0,0,0.1);
+      padding:1rem;
+    }
+    .nav-links.open{transform:translateX(0);}
+    #mobile-menu-toggle{display:block;cursor:pointer;}
+  }
+
+  /*──────────────────────────────────────────────────────────────────────────
+    HERO + PROFILE PHOTO
+  ──────────────────────────────────────────────────────────────────────────*/
+    #hero {
+      height: 100vh;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+
+    .hero-content {
+      text-align: center;
+      background: none;
+      padding: 2rem 2rem 0;
+      border-radius: 6px;
+      max-width: 900px;
+      position: relative;
+      z-index: 10;
+      top: -150px; /* ✅ move it up */
+    }
+
+    .hero-title{
+      font-size:3.5rem;
+      margin-bottom:1rem;
+      color:#fff;
+    }
+    .hero-subtitle{
+      font-size:1.25rem;
+      color:#ddd;
+    }
+    .cursor{
+      display:inline-block;
+      font-weight:bold;
+      animation:blink .7s infinite;
+    }
+    @keyframes blink{
+      0%,100%{opacity:1;}
+      50%{opacity:0;}
+    }
+
+
+    #profile-photo {
+      display: block;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid var(--clr-alt-bg);
+      margin: 10rem auto 1.5rem;
+      box-shadow: 0 0 20px rgba(74, 110, 255, 0.4);
+      animation: float-glow 4s ease-in-out infinite;
+      position: relative;
+      z-index: 10000;
+    }
+
+
+
+  /*──────────────────────────────────────────────────────────────────────────
+    CARDS & SCHOOLS
+  ──────────────────────────────────────────────────────────────────────────*/
+  .cards-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:1.5rem;
+    margin-top:2rem;
+  }
+    .cards-container.education {
+      margin-bottom: 3rem;
+    }
+  .card{
+    background:var(--clr-alt-bg);
+    border-radius:8px;
+    padding:1.5rem;
+    box-shadow:0 2px 6px rgba(0,0,0,0.1);
+    transition:transform var(--transition),box-shadow var(--transition);
+  }
+  .card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 8px 16px rgba(0,0,0,0.2);
+  }
+  .card h3{margin-bottom:.75rem;font-size:1.25rem;}
+  .card p{color:var(--clr-muted);margin-bottom:1rem;}
+  .card span{font-size:.9rem;color:var(--clr-muted);}
+
+  .school-logo{
+    display:block;
+    width:100px;
+    height:100px;
+    object-fit:contain;
+    margin:0 auto 1rem;
+  }
+
+    .cert-logo {
+      display: block;
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin: 0 auto 1rem;
+    }
+
+  /*──────────────────────────────────────────────────────────────────────────
+    SKILLS LIST
+  ──────────────────────────────────────────────────────────────────────────*/
+    .skills-scroll-container {
+      overflow: hidden;
+      white-space: nowrap;
+      margin-top: 2rem;
+    }
+
+    .skills-list {
+      display: flex;
+      gap: 1rem;
+      list-style: none; /* ⛔ removes the white dots */
+      padding: 0;
+      margin: 0;
+      animation: scroll-left 25s linear infinite;
+      will-change: transform;
+    }
+
+    .skills-list li {
+      background: var(--clr-alt-bg);
+      padding: .75rem 1.5rem;
+      border-radius: 4px;
+      text-align: center;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .skills-list:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes scroll-left {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    /*──────────────────────────────────────────────────────────────────────────
+      CERTIFICATIONS LIST
+    ──────────────────────────────────────────────────────────────────────────*/
+    .certs-container {
+      overflow: hidden;
+      white-space: nowrap;
+      margin-top: 2rem;
+    }
+    .certs-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .certs-list li {
+      background: var(--clr-alt-bg);
+      padding: .5rem 1rem;
+      border-radius: 4px;
+      text-align: center;
+      font-weight: 500;
+      white-space: nowrap;
+      font-size: .9rem;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease;
+    }
+    .certs-list li:hover {
+      transform: scale(1.05);
+    }
+
+  /*──────────────────────────────────────────────────────────────────────────
+    CONTACT
+  ──────────────────────────────────────────────────────────────────────────*/
+  .contact-container{
+    display:flex;
+    gap:2rem;
+    flex-wrap:wrap;
+    margin-top:2rem;
+  }
+  .contact-form{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:1rem;
+  }
+  .input-field{
+    padding:.75rem;
+    border:1px solid var(--clr-muted);
+    border-radius:4px;
+    background:var(--clr-alt-bg);
+    color:var(--clr-text);
+  }
+  .input-field:focus{
+    border-color:var(--clr-primary);
+    outline:none;
+  }
+    .contact-info {
+      flex:1;
+      background:var(--clr-alt-bg);
+      padding:1.5rem;
+      border-radius:8px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.1);
+    }
+  .contact-info p{
+    margin-bottom:1rem;
+    font-weight:500;
+  }
+  .contact-info a{color:var(--clr-primary);}
+
+  /*──────────────────────────────────────────────────────────────────────────
+    FOOTER
+  ──────────────────────────────────────────────────────────────────────────*/
+  .footer{
+    text-align:center;
+    padding:2rem 1rem;
+    background:var(--clr-alt-bg-2);
+    color:var(--clr-muted);
+    font-size:.9rem;
+  }
+
+  /*──────────────────────────────────────────────────────────────────────────
+    FADE-UP ANIMATIONS
+  ──────────────────────────────────────────────────────────────────────────*/
+  .fade-up{opacity:0;transform:translateY(20px);}
+  .fade-up.visible{
+    animation:fadeInUp .8s ease-out forwards;
+  }
+  @keyframes fadeInUp{
+    from{opacity:0;transform:translateY(20px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+
+  /*──────────────────────────────────────────────────────────────────────────
+    BACK TO TOP & THEME TOGGLE
+  ──────────────────────────────────────────────────────────────────────────*/
+  #back-to-top,#theme-toggle{
+    position:fixed;
+    right:1rem;
+    background:var(--clr-primary);
+    color:#fff;
+    border:none;
+    padding:.5rem;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:1.25rem;
+    z-index:200;
+    transition:background var(--transition),transform var(--transition);
+  }
+  #back-to-top:hover,#theme-toggle:hover{
+    background:var(--clr-primary-dark);
+    transform:scale(1.1);
+  }
+  #back-to-top{bottom:1rem;}
+  #theme-toggle{bottom:4rem;}
+
+  @media (max-width:640px){
+    .hero-title{font-size:2.5rem;}
+    .cards-container{grid-template-columns:1fr;}
+    .contact-container{flex-direction:column;}
+  }
+    .expandable-card {
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .expandable-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .expandable-card .description {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: var(--clr-muted);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .expandable-card.expanded .description {
+      max-height: 300px;
+      opacity: 1;
+    }
+
+    .expandable-card::after {
+      content: 'Click to Learn More';
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      font-size: 0.75rem;
+      color: var(--clr-muted);
+      font-style: italic;
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <!-- DARK MODE TOGGLE -->
+  <button id="theme-toggle" aria-label="Toggle Dark Mode">🌙</button>
+
+  <!-- BACK TO TOP -->
+  <button id="back-to-top" aria-label="Back to Top">↑</button>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="#" class="brand">Ryan&nbsp;Pegler</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#certifications">Credentials</a></li>
+        <li><a href="#beyond">Beyond Work</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="Ryan_Pegler_Resume.pdf" class="btn btn-primary" download>
+        📄 Resume
+      </a>
+      <button id="mobile-menu-toggle" aria-label="Toggle Menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="hero">
+
+    <div class="animated-lines-bg" aria-hidden="true">
+      <svg viewBox="0 0 1560 320" preserveAspectRatio="none" style="width:100%;height:100%;">
+        <defs>
+          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"  stop-color="#bbbbbb"/>
+            <stop offset="100%" stop-color="#dddddd"/>
+          </linearGradient>
+        </defs>
+
+        <!-- wrapper group so horizontal drift stays in sync -->
+        <g>
+          <!-- ---------- 10 lines, staggered 0.3 s each ---------- -->
+          <!-- Line 1 -->
+          <path fill="none" stroke="url(#lineGradient)" stroke-width="1.2" opacity="0.40">
+            <animate attributeName="d" dur="10s" repeatCount="indefinite"
+              values="
+                M0,90  C420,60  1100,140 1560,90;
+                M0,105 C420,75  1100,155 1560,105;
+                M0,90  C420,60  1100,140 1560,90
+              "/>
+            <animateTransform attributeName="transform" type="translate"
+              values="0 0; -120 0; 0 0" dur="16s" repeatCount="indefinite"/>
+          </path>
+
+          <!-- Line 2 -->
+          <path fill="none" stroke="url(#lineGradient)" stroke-width="1.2" opacity="0.38">
+            <animate attributeName="d" dur="10s" begin="0.3s" repeatCount="indefinite"
+              values="
+                M0,120 C420,90  1100,170 1560,120;
+                M0,135 C420,105 1100,185 1560,135;
+                M0,120 C420,90  1100,170 1560,120
+              "/>
+            <animateTransform attributeName="transform" type="translate"
+              values="0 0; -120 0; 0 0" dur="16s" repeatCount="indefinite"/>
+          </path>
+
+          <!-- Line 3 -->
+          <path fill="none" stroke="url(#lineGradient)" stroke-width="1.2" opacity="0.36">
+            <animate attributeName="d" dur="10s" begin="0.6s" repeatCount="indefinite"
+              values="
+                M0,150 C420,120 1100,200 1560,150;
+                M0,165 C420,135 1100,215 1560,165;
+                M0,150 C420,120 1100,200 1560,150
+              "/>
+            <animateTransform attributeName="transform" type="translate"
+              values="0 0; -120 0; 0 0" dur="16s" repeatCount="indefinite"/>
+          </path>
+
+          <!-- Line 4 -->
+          <path fill="none" stroke="url(#lineGradient)" stroke-width="1.2" opacity="0.34">
+            <animate attributeName="d" dur="10s" begin="0.9s" repeatCount="indefinite"
+              values="
+                M0,180 C420,150 1100,230 1560,180;
+                M0,195 C420,165 1100,245 1560,195;
+                M0,180 C420,150 1100,230 1560,180
+              "/>
+            <animateTransform attributeName="transform" type="translate"
+              values="0 0; -120 0; 0 0" dur="16s" repeatCount="indefinite"/>
+          </path>
+
+          <!-- Line 5 -->
+          <path fill="none" stroke="url(#lineGradient)" stroke-width="1.2" opacity="0.32">
+            <animate attributeName="d" dur="10s" begin="1.2s" repeatCount="indefinite"
+              values="
+                M0,210 C420,180 1100,260 1560,210;
+                M0,225 C420,195 1100,275 1560,225;
+                M0,210 C420,180 1100,260 1560,210
+              "/>
+            <animateTransform attributeName="transform" type="translate"
+              values="0 0; -120 0; 0 0" dur="16s" repeatCount="indefinite"/>
+          </path>
+
+          <!-- Line 6 -->
+          <path fill="none" stroke="url(#lineGradient)" stroke-width="1.2" opacity="0.30">
+            <animate attributeName="d" dur="10s" begin="1.5s" repeatCount="indefinite"
+              values="
+                M0,240 C420,210 1100,290 1560,240;
+                M0,255 C420,225 1100,305 1560,255;
+                M0,240 C420,210 1100,290 1560,240
+              "/>
+            <animateTransform attributeName="transform" type="translate"
+              values="0 0; -120 0; 0 0" dur="16s" repeatCount="indefinite"/>
+          </path>
+
+          <!-- Line 7 -->
+          <path fill="none" stroke="url(#lineGradient)" stroke-width="1.2" opacity="0.28">
+            <animate attributeName="d" dur="10s" begin="1.8s" repeatCount="indefinite"
+              values="
+                M0,270 C420,240 1100,320 1560,270;
+                M0,285 C420,255 1100,335 1560,285;
+                M0,270 C420,240 1100,320 1560,270
+              "/>
+            <animateTransform attributeName="transform" type="translate"
+              values="0 0; -120 0; 0 0" dur="16s" repeatCount="indefinite"/>
+          </path>
+
+          <!-- Line 8 -->
+          <path fill="none" stroke="url(#lineGradient)" stroke-width="1.2" opacity="0.26">
+            <animate attributeName="d" dur="10s" begin="2.1s" repeatCount="indefinite"
+              values="
+                M0,300 C420,270 1100,350 1560,300;
+                M0,315 C420,285 1100,365 1560,315;
+                M0,300 C420,270 1100,350 1560,300
+              "/>
+            <animateTransform attributeName="transform" type="translate"
+              values="0 0; -120 0; 0 0" dur="16s" repeatCount="indefinite"/>
+          </path>
+
+          <!-- Line 9 -->
+          <path fill="none" stroke="url(#lineGradient)" stroke-width="1.2" opacity="0.24">
+            <animate attributeName="d" dur="10s" begin="2.4s" repeatCount="indefinite"
+              values="
+                M0,330 C420,300 1100,380 1560,330;
+                M0,345 C420,315 1100,395 1560,345;
+                M0,330 C420,300 1100,380 1560,330
+              "/>
+            <animateTransform attributeName="transform" type="translate"
+              values="0 0; -120 0; 0 0" dur="16s" repeatCount="indefinite"/>
+          </path>
+
+          <!-- Line 10 -->
+          <path fill="none" stroke="url(#lineGradient)" stroke-width="1.2" opacity="0.22">
+            <animate attributeName="d" dur="10s" begin="2.7s" repeatCount="indefinite"
+              values="
+                M0,360 C420,330 1100,410 1560,360;
+                M0,375 C420,345 1100,425 1560,375;
+                M0,360 C420,330 1100,410 1560,360
+              "/>
+            <animateTransform attributeName="transform" type="translate"
+              values="0 0; -120 0; 0 0" dur="16s" repeatCount="indefinite"/>
+          </path>
+        </g>
+      </svg>
+    </div>
+
+    <div class="hero-content fade-up">
+
+
+      <img
+        id="profile-photo"
+        src="https://i.postimg.cc/ZqjnqDZ6/Linkedin-Profile.jpg"
+        alt="Profile Photo"
+      />
+      <h1 class="hero-title">Hello, I'm Ryan Pegler.</h1>
+      <p class="hero-subtitle">
+        <span id="typed-text"></span><span class="cursor">|</span>
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <!-- ABOUT -->
+    <section id="about" class="section fade-up">
+      <h2 class="section-title">About Me</h2>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 2rem;">
+        <img
+          src="https://i.postimg.cc/JhcR0xD3/Ryan-Pegler-Photo.jpg"
+          alt="Ryan Pegler"
+          style="width: 180px; height: 180px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 10px rgba(0,0,0,0.1);"
+        />
+        <p style="flex: 1; min-width: 250px;">
+          I'm a senior at the University of Illinois at Urbana Champaign studying Finance &amp; Information Systems within the Gies College of Business. I have strong interests in finance, data analytics, and technology, and I am devoted to driving change through my skills.
+          I've founded <strong>OpenField</strong>, a platform bridging under-represented athletes and NIL opportunities. I also have experience in investment analysis and equity research through my internship with <strong>Prairie Road Partners</strong>. I have hands-on experience with blockchain technology and portfolio management through organizations like <strong>Illini Blockchain</strong>. I am currently looking for opportunities to gain more hands-on experience in investment management, data analytics, and related roles.
+      </div>
+    </section>
+
+
+    <!-- EDUCATION -->
+    <div class="cards-container education">
+
+      <!-- UIUC Card -->
+      <div class="card expandable-card fade-up" onclick="toggleDescription(this)">
+        <img
+          class="school-logo"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/University_of_Illinois_seal.svg/1200px-University_of_Illinois_seal.svg.png"
+          alt="UIUC Logo"
+        />
+        <h3>University of Illinois Urbana-Champaign</h3>
+        <span>Gies College of Business</span><br />
+        <span>B.S. Finance &amp; Information Systems, Class of 2026</span>
+        <div class="description hidden">
+          <p><strong>Consistently ranked as a top 10 public business school and recognized as a Public Ivy, the Gies College of Business at UIUC is renowned for its rigorous academics, cutting-edge curriculum, and global reputation for producing future leaders in finance, tech, and entrepreneurship.</strong></p>
+          <ul style="padding-left: 1.2rem; margin: 0;">
+            <li>Investment Portfolio Organization</li>
+            <li>American Marketing Association</li>
+            <li>Kappa Delta Rho</li>
+            <li>Action Against Hunger</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bocconi Card -->
+      <div class="card expandable-card fade-up" onclick="toggleDescription(this)">
+        <img
+          class="school-logo"
+          src="https://i.postimg.cc/t4cmWbQx/Bocconi-LOGOO-removebg-preview.png"
+          alt="Bocconi Logo"
+        />
+        <h3>Università Bocconi</h3>
+        <span>Milan, Italy</span><br />
+        <span>Exchange Semester, Jan 2025 – May 2025</span>
+        <div class="description hidden">
+          <p><strong>Widely regarded as Europe's top institution for economics, finance, and management, Bocconi University is renowned for its world-class academics and powerful global network that launches students into elite careers in finance, management, and innovation worldwide.</strong></p>
+          <ul style="padding-left: 1.2rem; margin: 0;">
+            <li>FinTech, International Finance, Business Strategy, E-Marketing and E-Commerce, & Management of Fashion Companies</li>
+            <li>RadioBocconi</li>
+            <li>B4I Innovation Workshops</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section alt-bg">
+      <h2 class="section-title">Experience</h2>
+      <div class="cards-container">
+
+        <div class="card fade-up expandable-card" onclick="toggleDescription(this)">
+          <img class="school-logo" src="https://i.postimg.cc/DzRBNPBp/PRP-removebg-preview.png" alt="PRP Logo" />
+          <h3>Prairie Road Partners</h3>
+          <p>Private Equity Intern</p>
+          <span>Summer 2024</span>
+          <div class="description hidden">
+            <strong>A lower-middle market private equity search fund focused on sourcing, acquiring, and operating one high-potential business in North America. </strong>
+            Conducted deep-dive proprietary outreach to over 1,500 companies in verticals like SaaS, healthcare services, and niche B2B markets. Evaluated acquisition targets using market sizing, growth trends, and margin profiles.
+          </div>
+        </div>
+
+        <div class="card fade-up expandable-card" onclick="toggleDescription(this)">
+          <img class="school-logo" src="https://i.postimg.cc/MpnfNbCB/Open-Field-LOGO-removebg-preview.png" alt="OpenField Logo" />
+          <h3>OpenField</h3>
+          <p>Founder & Developer</p>
+          <span>2024 – Present</span>
+          <div class="description hidden">
+            <strong>A platform bridging underrepresented college athletes with NIL (Name, Image, Likeness) opportunities and higher-level exposure through several cutting-edge, personalized features.</strong>
+            Founded and led product development for a web platform connecting underrepresented athletes to hundreds of local brands and scouts.
+            Designed and coded core features including athlete bios, a live film feed, direct messaging, and verification tools.
+          </div>
+        </div>
+
+        <div class="card fade-up expandable-card" onclick="toggleDescription(this)">
+          <img class="school-logo" src="https://i.postimg.cc/2SN39R7s/blockchain-removebg-preview.png" alt="Illini Blockchain Logo" />
+          <h3>Illini Blockchain</h3>
+          <p>Investment Analyst</p>
+          <span>Jan 2024 – May 2024</span>
+          <div class="description hidden">
+            <strong>A student-led organization at the University of Illinois dedicated to advancing blockchain education, research, and hands-on development through workshops, speaker events, and collaborative projects with industry leaders.</strong>
+            Conducted in-depth research on emerging blockchains and digital asset trends as part of the Investment Team, while also engaging in hands-on development projects through a comprehensive boot-camp process.
+          </div>
+        </div>
+
+        <div class="card fade-up expandable-card" onclick="toggleDescription(this)">
+          <img class="school-logo" src="https://i.postimg.cc/T3yjXXzC/hedge-removebg-preview.png" alt="HEDGE Logo" />
+          <h3>HEDGE</h3>
+          <p>Equities & Options Analyst</p>
+          <span>Jan 2024 – May 2024</span>
+          <div class="description hidden">
+            <strong>A selective, student-run investment group focused on equities, derivatives, and alternative assets through technical and fundamental research.</strong>
+            Built weekly reports on U.S. equities using technical indicators, macro events, and earnings forecasts, while also conducting options analysis and portfolio management.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section fade-up">
+      <h2 class="section-title">Projects</h2>
+      <div class="cards-container">
+        <div class="card">
+          <h3>OpenField</h3>
+          <p>OpenField is a sports-tech platform connecting overlooked college athletes—especially from Division II and III programs—with local businesses for NIL deals, while helping them gain exposure through personalized bios, highlights, and stat showcases. Our mission is to bridge the gap between talent and opportunity through modern tech and data.</p>
+          <a href="https://openfieldus.com" class="link" target="_blank">🌐 View Project →</a>
+        </div>
+
+        <div class="card">
+          <h3>Upside</h3>
+          <p>Upside is a data-driven project that analyzes draft prospects using only the most important advanced metrics like BPM, offensive/defensive ratings, and age to forecast their NBA potential. It helps teams and fans assess which players are likely to become stars, or fall short; all based on years of historical data.</p>
+          <a href="https://upside-psi.vercel.app/" class="link" target="_blank">🌐 View Project →</a>
+        </div>
+
+        <div class="card">
+          <h3>Fundamental</h3>
+          <p>Fundamental is a simplified investment portfolio tool that tailors stock selections based solely on an individual’s risk tolerance, market outlook, and sector preferences. Inspired by simplified, beginner-friendly platforms, it aims to make smart investing accessible to everyday users.</p>
+          <a href="https://fundamental-omega.vercel.app/" class="link" target="_blank">🌐 View Project →</a><br>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section alt-bg fade-up">
+      <h2 class="section-title">Skills &amp; Tools</h2>
+      <div class="skills-scroll-container">
+        <ul class="skills-list">
+          <li>Financial Modeling & Valuation</li>
+          <li>Data Analysis & Visualization</li>
+          <li>Microsoft Suite</li>
+          <li>Market Research & Industry Analysis</li>
+          <li>Competitor Benchmarking</li>
+          <li>Market Research & Industry Analysis</li>
+          <li>SQL & Python (learning)</li>
+
+          <!-- duplicate for smooth loop -->
+          <li>Financial Modeling & Valuation</li>
+          <li>Data Analysis & Visualization</li>
+          <li>Basic HTML/CSS/JS & React</li>
+          <li>Google Analytics & Tableau</li>
+          <li>SQL & Python (learning)</li>
+          <li>Figma & UX Design Principles</li>
+        </ul>
+      </div>
+
+      </ul>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certifications" class="section alt-bg fade-up">
+      <h2 class="section-title">Certifications and Courses</h2>
+      <div class="cards-container">
+
+        <!-- AWS -->
+        <div class="card fade-up">
+          <img
+            class="school-logo"
+            src="https://download.logo.wine/logo/Amazon_Web_Services/Amazon_Web_Services-Logo.wine.png"
+            alt="AWS Logo"
+          />
+          <h3>AWS Cloud Practitioner Essentials</h3>
+          <span>AWS, Cloud architecture, Scalability & security, Cost optimization</span>
+        </div>
+
+        <!-- Stanford -->
+        <div class="card fade-up">
+          <img
+            class="school-logo"
+            src="https://identity.stanford.edu/wp-content/uploads/sites/3/2020/07/block-s-right.png"
+            alt="Stanford Logo"
+          />
+          <h3>AI for Everyone</h3>
+          <span>AI basics, Real-world use cases, Ethics in AI</span>
+        </div>
+
+        <!-- Google -->
+        <div class="card fade-up">
+          <img
+            class="school-logo"
+            src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg"
+            alt="Google Logo"
+          />
+          <h3>Google Analytics Certification</h3>
+          <span>Data-driven decision making, Audience Segmentation, Conversion Rate Optimization</span>
+        </div>
+
+        <!-- Microsoft Azure -->
+        <div class="card fade-up">
+          <img
+            class="school-logo"
+            src="https://logos-world.net/wp-content/uploads/2020/09/Microsoft-Logo.png"
+            alt="Microsoft Azure Logo"
+          />
+          <h3>Microsoft Azure AI Essentials</h3>
+          <span>Generative AI, Harnessing AI for Business, AI Workloads</span>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- BEYOND WORK -->
+    <section id="beyond" class="section fade-up">
+      <h2 class="section-title">Beyond Work</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; justify-content: space-between;">
+
+        <!-- Text column -->
+        <div style="flex: 1 1 350px; font-size: 1rem; line-height: 1.6; color: var(--clr-text);">
+          <p style="margin-bottom: 1.25rem;">
+            Here are some of my favorites beyond the resume. These passions keep me grounded and help me maintain a healthy work-life balance.
+          </p>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 0.6rem;">👨‍👩‍👧‍👦 <strong>Family:</strong> Youngest of 5 — with a dog and two cats at home. </li>
+            <li style="margin-bottom: 0.6rem;">🗣️ <strong>Socializing:</strong> I enjoy meeting people of all backgrounds and learning from their experiences. </li>
+            <li style="margin-bottom: 0.6rem;">🏀 <strong>Sports:</strong> Lifelong sports fan — Both playing and watching. Very competitive. </li>
+            <li style="margin-bottom: 0.6rem;">✈️ <strong>Travel:</strong> I've visited 20+ European cities and love experiencing new cultures. </li>
+            <li style="margin-bottom: 0.6rem;">📚 <strong>Reading:</strong> I keep up with the news daily and read books occasionaly. </li>
+            <li style="margin-bottom: 0.6rem;">🎬 <strong>Movies:</strong> Some of favorites are Good Will Hunting and Dead Poets Society.</li>
+            <li style="margin-bottom: 0.6rem;">💪 <strong>Working Out:</strong> I enjoy exercising by lifting or playing pickup games daily to stay healthy. </li>
+          </ul>
+        </div>
+
+        <!-- Image column -->
+        <img 
+          src="https://i.postimg.cc/xjkcRPYP/IMG-7111.jpg" 
+          alt="Family Photo" 
+          style="width: 280px; height: 280px; object-fit: cover; border-radius: 12px; box-shadow: 0 0 12px rgba(0,0,0,0.1); flex-shrink: 0; margin-right: 5rem;"
+        />
+
+      </div>
+    </section>
+
+
+    <!-- CONTACT -->
+    <section id="contact" class="section alt-bg fade-up">
+      <h2 class="section-title">Get in Touch</h2>
+      <div class="contact-container">
+        <form class="contact-form">
+          <input type="text" placeholder="Your Name" class="input-field" required />
+          <input type="email" placeholder="Your Email" class="input-field" required />
+          <textarea placeholder="Your Message" rows="4" class="input-field" required></textarea>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+        <div class="contact-info">
+          <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+            <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email" width="40" height="40">
+            <div>
+              <p style="margin: 0; font-weight: bold;">Email</p>
+              <a href="mailto:ryanpegler21@gmail.com">ryanpegler21@gmail.com</a>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" width="40" height="40">
+            <div>
+              <p style="margin: 0; font-weight: bold;">LinkedIn</p>
+              <a href="https://www.linkedin.com/in/ryanpegler" target="_blank">linkedin.com/in/ryanpegler</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer fade-up">
+    <p>© 2025 Ryan Pegler. All rights reserved.</p>
+  </footer>
+
+  <script>
+  // Selectors
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const backToTopBtn = document.getElementById('back-to-top');
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+  const navLinksContainer = document.querySelector('.nav-links');
+  const typedTextEl = document.getElementById('typed-text');
+  const cursorEl = document.querySelector('.cursor');
+
+  // Smooth scroll & active link
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      document.getElementById(link.getAttribute('href').slice(1))
+        .scrollIntoView({ behavior: 'smooth' });
+      navLinksContainer.classList.remove('open');
+    });
+  });
+  // Highlight on scroll
+  new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const id = entry.target.id;
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        document.querySelector(`.nav-links a[href="#${id}"]`)
+                .classList.add('active');
+      }
+    });
+  },{ threshold:0.5 }).observe(document.body);
+
+  // Fade-up
+  document.querySelectorAll('.fade-up').forEach(el => {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.disconnect();
+        }
+      });
+    }, { threshold:0.2 });
+    obs.observe(el);
+  });
+
+  // Typed text
+  const phrases = ['Rising Senior at the University of Illinois','Finance & Information Systems Major','Founder & Leader','Always Learning.'];
+  let charIndex=0, phraseIndex=0;
+  function type(){
+    let cur=phrases[phraseIndex];
+    if(charIndex<cur.length){
+      typedTextEl.textContent+=cur[charIndex++];
+      setTimeout(type,100);
+    } else setTimeout(erase,1500);
+  }
+  function erase(){
+    if(charIndex>0){
+      typedTextEl.textContent=typedTextEl.textContent.slice(0,-1);
+      charIndex--;
+      setTimeout(erase,50);
+    } else {
+      phraseIndex=(phraseIndex+1)%phrases.length;
+      setTimeout(type,500);
+    }
+  }
+  document.addEventListener('DOMContentLoaded',()=>setTimeout(type,1000));
+
+  // Back to top
+  window.addEventListener('scroll',()=>{
+    backToTopBtn.style.display = window.scrollY>window.innerHeight/2?'block':'none';
+  });
+  backToTopBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+  // Dark mode
+  (function(){
+    if(localStorage.getItem('theme')==='dark'){
+      document.body.classList.add('dark');
+      themeToggleBtn.textContent='☀️';
+    }
+    themeToggleBtn.onclick = ()=>{
+      document.body.classList.toggle('dark');
+      const dark=document.body.classList.contains('dark');
+      localStorage.setItem('theme',dark?'dark':'light');
+      themeToggleBtn.textContent = dark?'☀️':'🌙';
+    };
+  })();
+
+  // Mobile menu
+  mobileMenuToggle.addEventListener('click',()=>navLinksContainer.classList.toggle('open'));
+
+  // Contact form (demo)
+  document.querySelector('.contact-form').onsubmit=e=>{
+    e.preventDefault();
+    alert('Thanks for your message!');
+    e.target.reset();
+  };
+
+  // Parallax hero
+  window.addEventListener('scroll',()=>{
+    document.getElementById('hero')
+      .style.backgroundPositionY = window.scrollY*0.5+'px';
+  });
+    function toggleDescription(card) {
+      card.classList.toggle('expanded');
+    }
+  </script>
+</body>
+</html>
+
+
+
