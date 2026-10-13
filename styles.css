@@ -31,3 +31,66 @@
 @media(max-width:580px){.copy-email{min-height:40px;padding-inline:12px}.email-actions{gap:9px}.hero-lines{opacity:.2}}
 @media(prefers-reduced-motion:reduce){.hero-lines svg,.hero-lines path{animation:none!important;transform:none!important}}
 @media print{.reading-progress,.copy-email{display:none}}
+/* Expandable experience: company color, compact summary, full details on tap. */
+.experience-card{--role-color:#356bac;--role-tint:#edf3fc;display:block;padding:0;overflow:hidden;border-color:color-mix(in srgb,var(--role-color) 28%,var(--line));background:linear-gradient(105deg,var(--role-tint),var(--bg) 78%);box-shadow:inset 3px 0 0 var(--role-color)}
+.role-openfield{--role-color:#4e865e;--role-tint:#f0f7f0}
+.role-oracle{--role-color:#b95248;--role-tint:#fcf1ef}
+.role-prairie{--role-color:#8c7b63;--role-tint:#f7f4ed}
+.role-blockchain{--role-color:#bb6a36;--role-tint:#fcf3eb}
+.dark .experience-card{--role-tint:#15243a}
+.dark .role-openfield{--role-tint:#142c27;--role-color:#75ad89}
+.dark .role-oracle{--role-tint:#302127;--role-color:#dc867b}
+.dark .role-prairie{--role-tint:#292820;--role-color:#b3a387}
+.dark .role-blockchain{--role-tint:#2d251f;--role-color:#d29465}
+.experience-card:hover{border-color:var(--role-color);box-shadow:inset 3px 0 0 var(--role-color),var(--shadow)}
+.experience-summary{display:grid;grid-template-columns:90px minmax(0,1fr) 24px;gap:25px;align-items:center;padding:25px 27px;min-height:122px;cursor:pointer}
+.experience-title{min-width:0}
+.experience-summary .job-heading{margin:0;align-items:flex-start}
+.experience-summary .job-title{margin-top:3px;color:var(--ink);font-size:12px;line-height:1.75}
+.expand-hint{font-size:9px;display:block;color:var(--role-color);margin-top:8px;font-weight:500}
+.when-open{display:none}
+.experience-card[open] .when-open{display:inline}
+.experience-card[open] .when-closed{display:none}
+.experience-chevron{width:24px;height:24px;display:grid;place-items:center;color:var(--role-color);transition:transform .25s}
+.experience-chevron svg{width:20px;height:20px}
+.experience-card[open] .experience-chevron{transform:rotate(180deg)}
+.experience-details{padding:0 76px 27px 142px;animation:appear .25s ease both}
+.experience-details:before{content:'';display:block;height:1px;background:var(--line);margin-bottom:20px}
+.experience-details>p:first-of-type{margin-top:0}
+.experience-details .tags{margin-top:16px}
+/* Project controls preserve the existing cards and layout. */
+.project-filters{display:flex;gap:7px;flex-wrap:wrap;margin:-5px 0 20px}
+.project-filters[hidden],.project-card[hidden]{display:none!important}
+.project-filters button{display:flex;align-items:center;gap:9px;border:1px solid var(--line);background:var(--bg);border-radius:6px;padding:8px 12px;min-height:37px;font-size:10px;color:var(--muted);transition:background .2s,color .2s,border-color .2s}
+.project-filters button>span{font-family:'JetBrains Mono',monospace;font-size:8px;opacity:.7}
+.project-filters button:hover{border-color:var(--blue)}
+.project-filters button[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+/* Searchable command menu, available by touch or Ctrl/Cmd+K. */
+.command-toggle{display:flex;align-items:center;gap:8px;height:32px;padding:6px 8px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--muted)}
+.command-toggle[hidden]{display:none}
+.command-toggle svg{width:14px;height:14px}
+.command-toggle kbd{font-family:'JetBrains Mono',monospace;font-size:9px;white-space:nowrap}
+.command-dialog{width:min(540px,calc(100% - 32px));max-height:min(620px,calc(100dvh - 48px));padding:0;border:1px solid var(--line);border-radius:13px;background:var(--bg);color:var(--ink);box-shadow:0 30px 100px #0005;overflow:hidden}
+.command-dialog[open]{display:flex;flex-direction:column;animation:appear .18s ease both}
+.command-dialog::backdrop{background:#09132699;backdrop-filter:blur(5px)}
+.command-header{display:flex;align-items:center;justify-content:space-between;padding:17px 20px 10px;gap:15px}
+.command-header h2{font-size:13px;letter-spacing:0;font-weight:600}
+.command-close{width:32px;height:32px;border:1px solid var(--line);border-radius:5px;background:var(--surface);color:var(--muted);font-size:12px}
+#command-search{display:block;flex-shrink:0;width:calc(100% - 40px);margin:0 20px 15px;padding:12px 13px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);font:inherit;font-size:16px;outline-offset:2px}
+#command-search:focus{outline:2px solid var(--blue)}
+#command-search::placeholder{color:var(--muted);font-size:12px}
+.command-results{overflow-y:auto;overscroll-behavior:contain;padding:0 10px 10px;min-height:0}
+.command-results a{display:flex;align-items:center;justify-content:space-between;padding:12px;gap:18px;border-radius:6px;font-size:12px;min-height:60px;border:1px solid transparent}
+.command-results a[hidden],.command-empty[hidden]{display:none}
+.command-results a:hover,.command-results a.selected{background:var(--tag);border-color:var(--line)}
+.command-results a small{display:block;color:var(--muted);font-size:10px;margin-top:2px}
+.command-results a>span:last-child{color:var(--blue)}
+.command-empty{padding:15px 22px 28px;font-size:12px;color:var(--muted)}
+.command-footer{display:flex;justify-content:space-between;padding:11px 20px;border-top:1px solid var(--line);font-size:9px;color:var(--muted);flex-shrink:0;background:var(--surface)}
+.footer-divider{padding-inline:8px;opacity:.5}
+body.command-open{overflow:hidden}
+@media(max-width:1000px){nav{gap:15px}.nav-wrap{gap:18px}.header-actions{gap:10px}.command-toggle kbd{display:none}}
+@media(max-width:800px){.experience-summary{grid-template-columns:75px minmax(0,1fr) 22px;gap:20px;padding:23px}.experience-details{padding:0 65px 24px 118px}}
+@media(max-width:580px){.experience-summary{grid-template-columns:59px minmax(0,1fr) 18px;gap:12px;padding:21px 18px;min-height:119px}.experience-summary .logo-box{width:59px;height:54px;padding:6px}.experience-summary .job-heading h3{font-size:15px}.experience-summary .job-title{font-size:11px}.experience-summary .date{font-size:8px}.experience-summary .job-heading{display:block}.experience-summary .date{display:block;margin-top:5px;white-space:normal}.experience-details{padding:0 22px 23px}.expand-hint{font-size:8px;margin-top:7px}.experience-chevron{width:18px}.project-filters{gap:6px}.project-filters button{padding:9px 11px;min-height:42px}.command-toggle{width:34px;height:34px;justify-content:center}.command-dialog{max-height:calc(100dvh - 32px)}.command-header{padding:13px 16px 8px}#command-search{width:calc(100% - 32px);margin-inline:16px}.command-footer{font-size:8px;padding-inline:16px}}
+@media(prefers-reduced-motion:reduce){.experience-details,.command-dialog[open]{animation:none!important}.experience-chevron{transition:none}}
+@media print{.command-toggle,.command-dialog,.project-filters{display:none!important}.experience-card{break-inside:avoid}}

@@ -110,3 +110,101 @@
   }
   document.querySelector('#year').textContent = new Date().getFullYear();
 })();
+
+// Project filters and keyboard-accessible quick navigation.
+(() => {
+  'use strict';
+  const filters = document.querySelector('.project-filters');
+  const cards = [...document.querySelectorAll('.project-card')];
+  filters.hidden = false;
+  filters.querySelectorAll('button').forEach(button => {
+    button.addEventListener('click', () => {
+      const category = button.dataset.filter;
+      let count = 0;
+      cards.forEach(card => {
+        card.hidden = category !== 'all' && card.dataset.category !== category;
+        if (!card.hidden) { count++; card.classList.add('visible'); }
+      });
+      filters.querySelectorAll('button').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+      filters.querySelector('.filter-status').textContent = `${count} ${count === 1 ? 'project' : 'projects'} shown.`;
+    });
+  });
+
+  const dialog = document.querySelector('.command-dialog');
+  const trigger = document.querySelector('.command-toggle');
+  if (typeof dialog.showModal !== 'function') return;
+  const search = dialog.querySelector('#command-search');
+  const links = [...dialog.querySelectorAll('.command-results a')];
+  const empty = dialog.querySelector('.command-empty');
+  let selected = 0, returnFocus;
+  const visibleLinks = () => links.filter(link => !link.hidden);
+  function select(index, scroll = false) {
+    const visible = visibleLinks();
+    selected = visible.length ? (index + visible.length) % visible.length : 0;
+    links.forEach(link => link.classList.remove('selected'));
+    if (visible[selected]) {
+      visible[selected].classList.add('selected');
+      if (scroll) visible[selected].scrollIntoView({ block: 'nearest' });
+    }
+  }
+  function filter() {
+    const query = search.value.trim().toLowerCase();
+    links.forEach(link => { link.hidden = !`${link.textContent} ${link.dataset.search}`.toLowerCase().includes(query); });
+    empty.hidden = visibleLinks().length > 0;
+    select(0);
+  }
+  function open() {
+    if (dialog.open) return;
+    returnFocus = document.activeElement;
+    search.value = '';
+    filter();
+    dialog.showModal();
+    document.body.classList.add('command-open');
+    search.focus();
+  }
+  function close() { dialog.close(); }
+  trigger.hidden = false;
+  trigger.querySelector('kbd').textContent = /Mac|iPhone|iPad/.test(window.navigator.platform || '') ? '⌘ K' : 'Ctrl K';
+  trigger.addEventListener('click', open);
+  dialog.querySelector('.command-close').addEventListener('click', close);
+  dialog.addEventListener('close', () => {
+    document.body.classList.remove('command-open');
+    if (returnFocus && typeof returnFocus.focus === 'function') returnFocus.focus();
+  });
+  dialog.addEventListener('click', event => {
+    if (event.target !== dialog) return;
+    const rect = dialog.getBoundingClientRect();
+    if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) close();
+  });
+  search.addEventListener('input', filter);
+  links.forEach(link => link.addEventListener('click', () => {
+    close();
+    const href = link.getAttribute('href');
+    if (href.startsWith('#')) {
+      const section = document.querySelector(href);
+      if (section) {
+        returnFocus = section;
+        section.setAttribute('tabindex', '-1');
+        section.focus({ preventScroll: true });
+        section.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      }
+    }
+  }));
+  dialog.addEventListener('keydown', event => {
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      const focused = visibleLinks().indexOf(document.activeElement);
+      select((focused >= 0 ? focused : selected) + (event.key === 'ArrowDown' ? 1 : -1), true);
+      search.focus({ preventScroll: true });
+    } else if (event.key === 'Enter' && event.target === search) {
+      event.preventDefault();
+      visibleLinks()[selected]?.click();
+    }
+  });
+  document.addEventListener('keydown', event => {
+    if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k' && !event.altKey) {
+      event.preventDefault();
+      if (dialog.open) close(); else open();
+    }
+  });
+})();
