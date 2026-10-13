@@ -4,3 +4,30 @@
 @media(max-width:580px){.wrap,.nav-wrap{width:calc(100% - 40px)}.hero-content{padding-top:33px;padding-bottom:27px}.profile-photo{width:100px;height:100px;border-width:3px;margin-bottom:15px}.hero h1{font-size:44px;letter-spacing:-1.8px;margin-top:10px}.location{font-size:9px}.typed-line{font-size:12px;min-height:23px;margin-top:12px}.hero-description{font-size:12px;max-width:355px;margin-top:13px;line-height:1.9}.hero-description br{display:none}.hero-actions{margin-top:22px}.hero-affiliations{gap:11px;font-size:8px;margin-top:28px}.hero-lines{inset:20px -180px 0;opacity:.13;mask-image:linear-gradient(90deg,#000,transparent 45%,transparent 55%,#000)}.button{font-size:11px;padding:10px 17px;min-height:43px;gap:21px}.section{padding-top:42px}.section-heading{margin-bottom:21px;gap:16px}h2{font-size:23px;letter-spacing:-.6px}.section-note{font-size:7px}.about-grid,.beyond-grid{grid-template-columns:1fr;gap:22px}.about-copy p{font-size:13px;line-height:1.9}.about-aside{grid-template-columns:1fr;gap:15px;padding:19px 21px}.about-aside>div{padding-bottom:13px;border-bottom:1px solid var(--line)}.about-aside>div:last-child{border:0;padding-bottom:0}.about-aside>div>span:last-child{font-size:11px}.meta-label{font-size:8px}.experience-card{grid-template-columns:1fr;padding:21px;gap:16px}.logo-box{width:79px;height:58px}.job-heading h3{font-size:17px}.job-heading{gap:5px;margin-bottom:13px}.job-title{font-size:12px}.job-heading .date{font-size:9px;margin-top:3px}.experience-content .job-program{font-size:10px;line-height:1.75}.experience-content>p:not(.job-program),.experience-content ul{font-size:12px;line-height:1.95}.experience-content ul{padding-left:15px}.tags{gap:6px;margin-top:15px}.tags>span{font-size:9px;padding:4px 7px}.experience-list{gap:13px}.education-grid{grid-template-columns:1fr;gap:15px}.education-card{padding:23px}.education-card h3{font-size:21px;min-height:0}.school-logo{height:67px;width:71px;margin-bottom:20px}.wide-logo{width:118px}.school-location{font-size:8px}.school-name{font-size:12px}.degree{font-size:12px;margin-top:18px}.education-card .date{font-size:10px;margin-bottom:21px}.education-card summary{min-height:30px;font-size:11px}.project-card{padding:22px;display:flex;gap:0}.project-card .tags{align-self:flex-start;margin:16px 0 20px}.project-link{align-self:stretch;border-top:1px solid var(--line);padding-top:13px;min-height:43px}.project-top{width:100%;margin-bottom:18px}.project-card>p{font-size:12px}.project-card h3{font-size:19px;margin-bottom:10px}.skills-grid{grid-template-columns:1fr;gap:24px}.skills-grid h3{font-size:13px;margin-bottom:12px}.skill-list span{font-size:11px;padding:5px 10px}.credentials{margin-top:24px}.credentials summary{min-height:32px}.credentials ul{grid-template-columns:1fr;gap:8px}.beyond-grid>p{font-size:13px;line-height:1.9}.interests{grid-template-columns:repeat(4,1fr);gap:7px}.interests span{font-size:9px;padding:9px 5px}.contact-section{padding:24px;flex-direction:column;align-items:flex-start;gap:21px;margin-top:40px;margin-bottom:27px}.contact-section h2{font-size:23px}.contact-section p{font-size:12px;line-height:1.85}.email-address{font-size:11px;gap:12px;overflow-wrap:anywhere}.contact-section .button{font-size:11px;gap:22px}footer{font-size:9px;padding-block:21px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.motion-ready .reveal{opacity:1;transform:none}.type-cursor{display:none}}
 @media print{body{background:white;color:black}.site-header,.hero-lines,.hero-actions,.hero-affiliations,.theme-toggle{display:none}.wrap{width:100%}.section{padding-top:20px}.hero-content{padding:15px 0}.hero h1{font-size:32px}.profile-photo{width:80px;height:80px}.experience-card,.education-card,.project-card{break-inside:avoid}.reveal{opacity:1!important;transform:none!important}.contact-section{margin-top:20px;padding:15px}.experience-content>p,.about-copy p{color:#333}}
+
+/* Small interaction refinements. */
+.reading-progress{position:fixed;inset:0 0 auto;height:2px;z-index:50;pointer-events:none}
+.reading-progress>span{display:block;width:100%;height:100%;background:var(--blue);transform:scaleX(0);transform-origin:left;will-change:transform}
+.hero-lines{opacity:.24}
+.dark .hero-lines{opacity:.3}
+.hero-lines svg{animation:wave-drift 12s ease-in-out infinite alternate;overflow:visible}
+.hero-lines path{transform-origin:center;animation:wave-ripple 8s ease-in-out infinite alternate;vector-effect:non-scaling-stroke}
+.hero-lines path:nth-child(2){animation-delay:-1s;animation-duration:9s}
+.hero-lines path:nth-child(3){animation-delay:-2s;animation-duration:10s}
+.hero-lines path:nth-child(4){animation-delay:-3s;animation-duration:9s}
+.hero-lines path:nth-child(5){animation-delay:-4s;animation-duration:11s}
+.hero-lines path:nth-child(6){animation-delay:-5s;animation-duration:10s}
+.hero-lines path:nth-child(7){animation-delay:-6s;animation-duration:12s}
+@keyframes wave-drift{from{transform:translate(-1%,-2%)}to{transform:translate(2%,3%)}}
+@keyframes wave-ripple{from{transform:translateY(-12px) scaleY(.97)}to{transform:translateY(14px) scaleY(1.03)}}
+.email-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px}
+.email-actions .email-address{margin-top:0}
+.copy-email{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:7px 10px;border:1px solid var(--line);border-radius:5px;background:var(--bg);font:inherit;font-size:10px;color:var(--muted);transition:border-color .2s,color .2s}
+.copy-email[hidden]{display:none}
+.copy-email:hover{border-color:var(--blue);color:var(--blue)}
+.copy-email svg{width:13px;height:13px}
+.copy-email.copied{color:var(--blue);border-color:var(--blue)}
+.logo-box,.school-logo{overflow:hidden;flex-shrink:0}
+@media(max-width:580px){.copy-email{min-height:40px;padding-inline:12px}.email-actions{gap:9px}.hero-lines{opacity:.2}}
+@media(prefers-reduced-motion:reduce){.hero-lines svg,.hero-lines path{animation:none!important;transform:none!important}}
+@media print{.reading-progress,.copy-email{display:none}}

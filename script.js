@@ -65,6 +65,48 @@
     else { phrase = 0; index = phrases[0].length; deleting = true; typed.textContent = phrases[0]; timer = window.setTimeout(type, 2800); }
   });
   const header = document.querySelector('.site-header');
-  window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 10), { passive: true });
+  const progress = document.querySelector('.reading-progress > span');
+  let scrollQueued = false;
+  function updateScroll() {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const fraction = scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0;
+    progress.style.transform = `scaleX(${fraction})`;
+    header.classList.toggle('scrolled', window.scrollY > 10);
+    scrollQueued = false;
+  }
+  function queueScroll() {
+    if (!scrollQueued) { scrollQueued = true; window.requestAnimationFrame(updateScroll); }
+  }
+  window.addEventListener('scroll', queueScroll, { passive: true });
+  window.addEventListener('resize', queueScroll);
+  window.addEventListener('load', queueScroll);
+  if ('ResizeObserver' in window) new window.ResizeObserver(queueScroll).observe(document.body);
+  updateScroll();
+
+  const copyButton = document.querySelector('.copy-email');
+  const copyLabel = copyButton.querySelector('span');
+  const copyStatus = document.querySelector('.copy-status');
+  let copyReset;
+  if (window.navigator.clipboard && window.navigator.clipboard.writeText) {
+    copyButton.hidden = false;
+    copyButton.addEventListener('click', async () => {
+      window.clearTimeout(copyReset);
+      try {
+        await window.navigator.clipboard.writeText('ryan.d.pegler@gmail.com');
+        copyButton.classList.add('copied');
+        copyLabel.textContent = 'Copied';
+        copyStatus.textContent = 'Email address copied to clipboard.';
+      } catch {
+        copyButton.classList.remove('copied');
+        copyLabel.textContent = 'Copy';
+        copyStatus.textContent = 'Could not copy. You can select the email address or click it to open your email app.';
+      }
+      copyReset = window.setTimeout(() => {
+        copyButton.classList.remove('copied');
+        copyLabel.textContent = 'Copy';
+        copyStatus.textContent = '';
+      }, 2500);
+    });
+  }
   document.querySelector('#year').textContent = new Date().getFullYear();
 })();
