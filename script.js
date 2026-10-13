@@ -6,7 +6,7 @@
     document.body.classList.toggle('dark', dark);
     themeButton.setAttribute('aria-pressed', String(dark));
     themeButton.setAttribute('aria-label', `Switch to ${dark ? 'light' : 'dark'} theme`);
-    document.querySelector('meta[name="theme-color"]').content = dark ? '#14252c' : '#f5f4ef';
+    document.querySelector('meta[name="theme-color"]').content = dark ? '#0d1524' : '#ffffff';
   }
   try { setTheme(localStorage.getItem('theme') === 'dark'); } catch { /* Storage may be unavailable in private contexts. */ }
   themeButton.addEventListener('click', () => {
@@ -45,7 +45,7 @@
     }), { rootMargin: '-15% 0px -65% 0px', threshold: 0 });
     document.querySelectorAll('main section[id]').forEach(section => active.observe(section));
   }
-  const phrases = ['Financial Data Analyst at Allstate.', 'Founder of OpenField.', 'Illinois Gies graduate.', 'Always curious. Always building.'];
+  const phrases = ['Financial Data Analyst at Allstate', 'Founder of OpenField', 'Finance & Information Systems | Illinois', 'Bocconi University | Milan'];
   const typed = document.querySelector('#typed-text');
   let phrase = 0, index = phrases[0].length, deleting = true, timer;
   function type() {
